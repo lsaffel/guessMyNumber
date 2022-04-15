@@ -16,17 +16,25 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0; // initialize variable
 
+// add a function to refactor and remove some repeated code.
+// This displays a message that is passed to it.
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess, typeof guess);
 
   // When there is no input
   if (!guess) {
-    document.querySelector('.message').textContent = '⛔️ No number!';
+    // document.querySelector('.message').textContent = '⛔️ No number!';
+    displayMessage('⛔️ No number!');
 
     // When player wins
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = '🎉 Correct Number!';
+    // document.querySelector('.message').textContent = '🎉 Correct Number!';
+    displayMessage('🎉 Correct Number!');
     document.querySelector('.number').textContent = secretNumber;
 
     // make the page background into light green - the hex number
@@ -53,12 +61,14 @@ document.querySelector('.check').addEventListener('click', function () {
     // when guess is wrong
   } else if (guess !== secretNumber) {
     if (score > 1) {
-      document.querySelector('.message').textContent =
-        guess > secretNumber ? '📈 Too high!' : '📉 Too low!';
+      // document.querySelector('.message').textContent =
+      //   guess > secretNumber ? '📈 Too high!' : '📉 Too low!';
+      displayMessage(guess > secretNumber ? '📈 Too high!' : '📉 Too low!');
       score--;
       document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector('.message').textContent = '💥 You lost the game!';
+      // document.querySelector('.message').textContent = '💥 You lost the game!';
+      displayMessage('💥 You lost the game!');
       document.querySelector('.score').textContent = 0;
     }
   }
@@ -104,7 +114,8 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('.number').style.width = '15rem';
 
   // set the secret number message back to "Start guessing..."
-  document.querySelector('.message').textContent = 'Start guessing...';
+  // document.querySelector('.message').textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
 
   // set the number slot in the centre back to ?
   document.querySelector('.number').textContent = '?';
